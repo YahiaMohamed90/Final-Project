@@ -9,7 +9,7 @@ clone the repo :: git clone https://github.com/YahiaMohamed90/Final-Project.git
 
  you should have Terraform and Ansibal installed on your own system 
  
- cd to jenkins-ansible directory . run following commands
+ cd to infrastructure directory . run following commands
  
  # terraform init
  # terraform plan --var-file dv.tfvars
