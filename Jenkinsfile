@@ -25,6 +25,7 @@ pipeline {
                             sh 'kubectl create -f /eks-flask-files/secret.yml '
                             sh 'kubectl create -f /eks-flask-files/statefulset.yml '
                             sh 'kubectl create -f /eks-flask-files/flask-app.yml '
+                            cleanWs deleteDirs: true
                           
 
 
