@@ -24,7 +24,7 @@ to trigger the pipeline with github used # ngrok that expose jenkins localhost t
 ngrok download link https://ngrok.com/download
 
 
-# impoertant notice 
+# important notice 
  - in local.tf file you shouid replace # yahia by your home user name 
  - when creating EKS Cluster if you have issues when apply terraform file called worker.tf just run # apply again to create workernode
  - in provider.tf file you shouild replace yahia by your home user name
