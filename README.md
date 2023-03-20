@@ -16,3 +16,7 @@ clone the repo :: git clone https://github.com/YahiaMohamed90/Final-Project.git
  # terraform apply --var-file dv.tfvars
  
  after run above commands cheack your AWS Acount to validate infrastructure that were be created . ( Ec2 Jenkins Server & EKS cluster with Node Groups & ECR 
+
+After build infrastructure we are ready to deploy Flask-app with MYSQL database on kubernets cluster EKS
+
+to trigger the pipeline with github used # ngrok to make the 
