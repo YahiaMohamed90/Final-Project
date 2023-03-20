@@ -1,0 +1,112 @@
+---
+- name: Installing Jenkins server
+  hosts: all
+  vars: 
+    - executable_temp_dir: /tmp
+  become: true
+  remote_user: ubuntu
+  gather_facts: false
+  tasks:
+    - name: Update all packages to their latest version
+      apt:
+        upgrade: yes
+        update_cache: yes
+      ignore_errors: true
+    - name: Installing some packages
+      apt:
+        name: 
+          - wget
+          - git
+          - curl
+          - openjdk-11-jre
+          - vim
+          - pip
+          - unzip
+        state: latest
+      ignore_errors: true
+
+    - name: checking repository
+      shell: |
+        curl -fsSL https://pkg.jenkins.io/debian/jenkins.io.key | sudo tee \
+        /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+        echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
+        https://pkg.jenkins.io/debian binary/ | sudo tee \
+        /etc/apt/sources.list.d/jenkins.list > /dev/null
+
+    - name: Update all packages to their latest version
+      apt:
+        update_cache: yes
+      ignore_errors: true
+
+    - name: Installing Jenkins
+      apt:
+        name: jenkins
+        state: latest
+
+    - name: Make sure a service unit is running
+      systemd:
+        name: jenkins
+        state: started
+     # https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+    - name: Download awscliv2 installer.
+      unarchive:
+        src: "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip"
+        dest: "{{ executable_temp_dir }}"
+        remote_src: true
+        creates: '{{ executable_temp_dir }}/aws'
+        mode: 0755
+
+    - name: Run the installer.
+      command:
+      args:
+        cmd: "{{ executable_temp_dir }}/aws/install"
+        creates: /usr/local/bin/aws
+      become: true
+      register: aws_install
+
+    - name: "Show installer output."
+      debug:
+        var: aws_install
+        verbosity: 2
+    - name: remove any installed docker
+      apt:
+        name:
+          - docker 
+          - docker-engine 
+          - docker.io 
+          - containerd 
+          - runc 
+        state: absent
+    - name: add docker-ce apt key
+      ansible.builtin.apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+    - name: docker-ce-stable deb repository
+      ansible.builtin.apt_repository:
+        repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
+        state: present
+    - name: Install Docker
+      apt:
+        name: 
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+        state: latest
+    - name: add docker group
+      group:
+        name: docker
+        state: present
+    - name: add $USER to docker group
+      user: 
+        name: ubuntu
+        groups: docker
+        append: yes
+    - name: add jenkins to docker group
+      user: 
+        name: jenkins
+        groups: docker
+        append: yes
+    - name: chmod 666 for /var/run/dovker.sock
+      file:
+       path: /var/run/docker.sock
+       mode: '666'
