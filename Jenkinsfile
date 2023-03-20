@@ -4,7 +4,7 @@ pipeline {
             
             stage('Docker Image Build') {
                 steps {
-                    sh 'docker build  .  -t final-project -f /Flask-app/app/Dockerfile '
+                    sh 'docker build  .  -t final-project -f Flask-app/app/Dockerfile '
                 }
             }
             stage('Push Docker Image to ECR') {
