@@ -3,6 +3,7 @@ COPY . /app
 WORKDIR /app
 RUN apk add gcc musl-dev python3-dev libffi-dev openssl-dev
 RUN pip install --upgrade pip
+RUN pip freeze > requirements.txt
 RUN pip install -r requirements.txt
 EXPOSE 5002
 ENTRYPOINT ["python"]
