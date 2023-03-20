@@ -1,10 +1,7 @@
 pipeline {
     agent any
     stages {
-            stage('Checkout') {
-                steps {
-                    checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: '<GIT_REPO_URL>']]])
-                }
+            
             stage('Docker Image Build') {
                 steps {
                     sh 'docker build  -f /Flsk-app/app/Dockerfile -t final-provect '
