@@ -3,7 +3,7 @@ COPY . /app
 WORKDIR /app
 RUN apk add gcc musl-dev python3-dev libffi-dev openssl-dev
 RUN pip install --upgrade pip
-RUN pip freeze > requirements.txt
+COPY /Flsk-app/app/requirements.txt /app
 RUN pip install -r requirements.txt
 EXPOSE 5002
 ENTRYPOINT ["python"]
