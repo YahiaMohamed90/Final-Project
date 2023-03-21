@@ -3,6 +3,17 @@
   hosts: all
   vars: 
     - executable_temp_dir: /tmp
+    - kubectl_version: 1.25.5
+    - kubectl_download_filetype: binary
+    - kubectl_checksum_archive: sha512:c229b5700944f86f8312cb76d44248de813b8bae58026ec137b3e19bf422e91ed9848115bd549c5d5915b43acd639db71c2e9ece756c1b1c4f706672e11151b6
+    - kubectl_bin_directory: /usr/local/bin
+    - kubectl_tmp_directory: "{{ lookup('env', 'TMPDIR') | default('/tmp',true) }}"
+    - kubectl_owner: root
+    - kubectl_group: root
+    - kubectl_binary_mode: 0755
+    - kubectl_os: linux
+    - kubectl_arch: amd64
+
   become: true
   remote_user: ubuntu
   gather_facts: false
@@ -110,3 +121,32 @@
       file:
        path: /var/run/docker.sock
        mode: '666'
+    - name: Download kubectl archive
+      ansible.builtin.get_url:
+        url: "https://storage.googleapis.com/kubernetes-release/release/v{{ kubectl_version }}/kubernetes-client-{{ kubectl_os }}-{{ kubectl_arch }}.tar.gz"
+        checksum: "{{ kubectl_checksum_archive }}"
+        dest: "{{ kubectl_tmp_directory }}"
+        mode: 0600
+      tags:
+        - kubectl
+
+    - name: Unarchive kubernetes-client
+      ansible.builtin.unarchive:
+        src: "{{ kubectl_tmp_directory }}/kubernetes-client-{{ kubectl_os }}-{{ kubectl_arch }}.tar.gz"
+        dest: "{{ kubectl_tmp_directory }}"
+        remote_src: true
+      tags:
+        - kubectl
+
+    - name: Copy kubectl binary to destination directory
+      ansible.builtin.copy:
+        src: "{{ kubectl_tmp_directory }}/kubernetes/client/bin/{{ item }}"
+        dest: "{{ kubectl_bin_directory }}/{{ item }}"
+        mode: "{{ kubectl_binary_mode }}"
+        owner: "{{ kubectl_owner }}"
+        group: "{{ kubectl_group }}"
+        remote_src: true
+      with_items:
+        - kubectl
+                            
+        
