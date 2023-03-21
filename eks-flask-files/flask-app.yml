@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: webapp
-        image: yahia90/devops:my-finalapp
+        image: public.ecr.aws/n4z8o9z9/public-ecr:latest
         imagePullPolicy: Always 
         ports:
         - containerPort: 5002
