@@ -28,5 +28,5 @@ ngrok download link https://ngrok.com/download
  - in local.tf file you shouid replace # yahia by your home user name 
  - when creating EKS Cluster if you have issues when apply terraform file called worker.tf just run # apply again to create workernode
  - in provider.tf file you shouild replace yahia by your home user name
- - cd to public-ecr directory and run # terraform apply to publish public repo
+ - cd to public-ecr directory and run terraform apply to publish public repo
 
