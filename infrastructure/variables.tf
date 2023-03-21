@@ -24,7 +24,7 @@ variable "region" {
 }
 
 
-variable "eks_cluster" {
+variable "cluster_name" {
   type = string
 }
 
