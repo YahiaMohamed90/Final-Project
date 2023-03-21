@@ -19,7 +19,7 @@ clone the repo :: git clone https://github.com/YahiaMohamed90/Final-Project.git
 
 After build infrastructure we are ready to deploy Flask-app with MYSQL database on kubernets cluster EKS
 
-to trigger the pipeline with github used # ngrok that expose jenkins localhost to can be using the url in githb webhook
+to trigger the pipeline with github used # ngrok that expose jenkins localhost to can be using the url in github webhook
 
 ngrok download link https://ngrok.com/download
 
