@@ -21,12 +21,12 @@ spec:
         ports:
         - containerPort: 5002
         env:
-        - name: DB_PASSWORD
+        - name: MYSQL_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
               name: flaskapi-secrets
-              key: MYSQL_DATABASE_PASSWORD
-        - name: MYSQL_DATABASE_DB
+              key: MYSQL_ROOT
+        - name: MYSQL_DATABASE
           value:  BucketList
         - name: MYSQL_DATABASE_HOST
           valueFrom:
