@@ -10,7 +10,7 @@
 
  - you should have Terraform and Ansibal installed on your own system 
  
- -cd to infrastructure directory . run following commands
+ - cd to infrastructure directory . run following commands
  
  # terraform init
  # terraform plan --var-file dv.tfvars
@@ -26,10 +26,11 @@
 
 
  # **important notice** 
- - in local.tf file you shouid replace # yahia by your home user name 
- - when creating EKS Cluster if you have issues when apply terraform file called worker.tf just run # apply again to create workernode
+ - in local.tf file you shouid replace yahia by your home user name 
  - in provider.tf file you shouild replace yahia by your home user name
+ - Configure tour AWS account put your ACCESS_ID & SECRET_KEY & REGION in ~/.aws 
  - cd to public-ecr directory and run terraform apply to publish public repo
+
 
 
 
