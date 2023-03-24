@@ -6,11 +6,11 @@
  # How to build this project ::
 
  # clone the repo 
-  # - git clone https://github.com/YahiaMohamed90/Final-Project.git
+   - git clone https://github.com/YahiaMohamed90/Final-Project.git
 
- # you should have Terraform and Ansibal installed on your own system 
+ - you should have Terraform and Ansibal installed on your own system 
  
- # cd to infrastructure directory . run following commands
+ -cd to infrastructure directory . run following commands
  
  # terraform init
  # terraform plan --var-file dv.tfvars
@@ -30,4 +30,6 @@
  - when creating EKS Cluster if you have issues when apply terraform file called worker.tf just run # apply again to create workernode
  - in provider.tf file you shouild replace yahia by your home user name
  - cd to public-ecr directory and run terraform apply to publish public repo
+
+
 
