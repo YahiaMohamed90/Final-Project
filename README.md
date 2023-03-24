@@ -28,7 +28,7 @@
  # **important notice** 
  - in local.tf file you shouid replace yahia by your home user name 
  - in provider.tf file you shouild replace yahia by your home user name
- - Configure tour AWS account put your ACCESS_ID & SECRET_KEY & REGION in ~/.aws 
+ - Configure your AWS account put your ACCESS_ID & SECRET_KEY & REGION in ~/.aws 
  - cd to public-ecr directory and run terraform apply to publish public repo
 
 
