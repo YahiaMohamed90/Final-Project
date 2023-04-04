@@ -10,7 +10,7 @@ public-subnet4 = "10.0.4.0/24"
 
 region = "us-west-2"
 
-eks_cluster = "my-EKS1"
+cluster_name = "my-EKS1"
 
 
 
